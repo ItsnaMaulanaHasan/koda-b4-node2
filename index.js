@@ -1,44 +1,14 @@
 import { converterDate } from "./lib/converter.js";
-import readline from "node:readline";
+import { interfaceConvert } from "./lib/interfaceConvert.js";
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-const inputAgain = () => {
-  rl.question(" Input lagi (y/n): ", (input) => {
-    switch (input) {
-      case "y":
-      case "Y":
-        main();
-        break;
-      case "n":
-      case "N":
-        rl.close();
-        break;
-      default:
-        rl.question(" Input tidak sesuai ", () => {
-          inputAgain();
-        });
-        break;
-    }
-  });
-};
-
-const main = () => {
-  console.clear();
-  console.log(" ----- Selamat Datang di Converter Date ----- ");
-  rl.question(" Masukkan tanggal (dd-mm-yyy): ", async (inputDate) => {
-    try {
-      const convert = await converterDate(inputDate);
-      console.log(` Hasil convert tanggal: ${convert}`);
-      inputAgain();
-    } catch (err) {
-      console.log(err);
-      inputAgain();
-    }
-  });
-};
+async function main() {
+  try {
+    const input = await interfaceConvert("Masukkan Tanggal (dd-mm-yy): ");
+    const convert = await converterDate(input);
+    console.log(`Hasil Konversi: ${convert}`);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 main();
