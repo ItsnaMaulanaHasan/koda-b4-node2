@@ -7,5 +7,5 @@ npm run dev:sync
 ## Untuk menjalankan program versi Asynchronus
 
 ```
-npm run dev:Async
+npm run dev:async
 ```
