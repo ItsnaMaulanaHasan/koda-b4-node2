@@ -6,9 +6,15 @@ const rl = readline.createInterface({
 });
 
 export function interfaceInputAsync(quest) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     rl.question(quest, (input) => {
-      resolve(input);
+      if (input === "") {
+        reject(" Input tidak boleh kosong");
+        rl.close();
+      } else {
+        resolve(input);
+        rl.close();
+      }
     });
   });
 }
